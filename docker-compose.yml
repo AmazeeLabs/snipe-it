@@ -1,7 +1,7 @@
 version: '2.3'
 
 x-lagoon-project:
-  &lagoon-project snipeit
+  &lagoon-project snipeit_al
 
 x-volumes:
   &default-volumes
