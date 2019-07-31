@@ -15,8 +15,11 @@ COPY . /app
 RUN apk add \
  openldap-dev \
  openldap  \
-&&docker-php-ext-configure ldap --with-libdir=lib/ \
-&& docker-php-ext-install ldap
+ libzip-dev \
+&& docker-php-ext-configure ldap --with-libdir=lib/ \
+&& docker-php-ext-install ldap \
+&& docker-php-ext-configure zip --with-libzip=/usr/include \
+&& docker-php-ext-install zip
 
 ###Create symlinks for data directories
 RUN \
