@@ -1,0 +1,43 @@
+docker-compose-yaml: docker-compose.yml
+
+project: snipeit
+endpoint: api-lagoon-master.lagoon.ch.amazee.io:31472
+api: api-lagoon-master.lagoon.ch.amazee.io:80
+
+tasks:
+  post-rollout:
+#    - run:
+#        name: Create directories
+#        command: mkdir /app/storage/framework/ & mkdir /app/storage/framework/cache/ & mkdir /app/storage/framework/sessions/ & mkdir /app/storage/framework/views/ & mkdir /app/storage/private_uploads
+#        service: cli
+    - run:
+        name: Run migrations
+        command: php artisan migrate
+        service: cli
+    - run:
+        name: Run storage link
+        command: php artisan storage:link
+        service: cli
+    - run:
+        name: Clear config
+        command: php artisan config:clear
+        service: cli
+    - run:
+        name: Clear cache
+        command: php artisan config:cache
+        service: cli
+
+environments:
+ master:
+   routes:
+    - nginx:
+       - "snipeit.amazeelabs.com"
+   cronjobs:
+     - name: artisan schedule
+       schedule: "* * * * *"
+       command: cd /app && php artisan schedule:run
+       service: cli
+ dev:
+   routes:
+      - nginx:
+        - "snipeit-dev.ch.amazee.io"
