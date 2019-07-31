@@ -60,6 +60,60 @@
             "time": "2018-12-06T15:03:32+00:00"
         },
         {
+            "name": "amazee/laragoon-support-libs",
+            "version": "0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AmazeeLabs/laragoon_support_libs.git",
+                "reference": "a0595d5187125770868accad5fa15faec367cd5c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AmazeeLabs/laragoon_support_libs/zipball/a0595d5187125770868accad5fa15faec367cd5c",
+                "reference": "a0595d5187125770868accad5fa15faec367cd5c",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/yaml": "^3.4|^4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Amazee\\LaragoonSupport\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Blaize Kaye",
+                    "email": "blaize.kaye@gmail.com"
+                },
+                {
+                    "name": "Bryan Gruneberg",
+                    "email": "hello@bryangruneberg.com"
+                }
+            ],
+            "description": "Access the lagoon API from PHP",
+            "keywords": [
+                "amazee",
+                "amazee.io",
+                "console",
+                "deploy",
+                "devops",
+                "docker",
+                "lagoon",
+                "laravel",
+                "php"
+            ],
+            "time": "2019-02-28T20:02:52+00:00"
+        },
+        {
             "name": "aws/aws-sdk-php",
             "version": "3.90.5",
             "source": {
@@ -186,6 +240,68 @@
             "description": "BaconQrCode is a QR code generator for PHP.",
             "homepage": "https://github.com/Bacon/BaconQrCode",
             "time": "2017-10-17T09:59:25+00:00"
+        },
+        {
+            "name": "bryangruneberg/laragoon",
+            "version": "0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bryangruneberg/laragoon.git",
+                "reference": "0f37d6aa74cb60707c5eac7b8fbbf1454c370cca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bryangruneberg/laragoon/zipball/0f37d6aa74cb60707c5eac7b8fbbf1454c370cca",
+                "reference": "0f37d6aa74cb60707c5eac7b8fbbf1454c370cca",
+                "shasum": ""
+            },
+            "require": {
+                "amazee/laragoon-support-libs": "^0.1",
+                "php": ">=5.6.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Bryangruneberg\\Laragoon\\LaragoonServiceProvider"
+                    ],
+                    "aliases": {
+                        "Laragoon": "Bryangruneberg\\Laragoon\\LaragoonFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bryangruneberg\\Laragoon\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Blaize Kaye",
+                    "email": "blaize.kaye@gmail.com"
+                },
+                {
+                    "name": "Bryan Gruneberg",
+                    "email": "hello@bryangruneberg.com"
+                }
+            ],
+            "description": "The Laragoon utility package",
+            "homepage": "https://laragoon.io",
+            "keywords": [
+                "amazee",
+                "amazee.io",
+                "console",
+                "deploy",
+                "devops",
+                "docker",
+                "lagoon",
+                "laravel"
+            ],
+            "time": "2019-04-17T12:15:41+00:00"
         },
         {
             "name": "defuse/php-encryption",
