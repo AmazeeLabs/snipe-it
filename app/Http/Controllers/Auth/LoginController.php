@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Redirect;
@@ -79,15 +78,15 @@ class LoginController extends Controller
 
     /**
      * Log in a user by LDAP
-     * 
+     *
      * @author Wes Hulette <jwhulette@gmail.com>
-     * 
+     *
      * @since 5.0.0
      *
      * @param Request $request
-     * 
+     *
      * @return User
-     * 
+     *
      * @throws \Exception
      */
     private function loginViaLdap(Request $request): User
@@ -110,7 +109,7 @@ class LoginController extends Controller
             if ($pos > 0) {
                 $remote_user = substr($remote_user, $pos + 1);
             };
-            
+
             try {
                 $user = User::where('username', '=', $remote_user)->whereNull('deleted_at')->where('activated', '=', '1')->first();
                 Log::debug("Remote user auth lookup complete");
