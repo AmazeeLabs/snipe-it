@@ -51,7 +51,7 @@ RUN \
   && mkdir -p '/app/keys' \
   && mkdir -p '/app/storage/framework'
 
-RUN composer install --no-dev --prefer-dist
+RUN composer install --optimize-autoloader --apcu-autoloader
 
 COPY --from=nodebuilder /app/ /app/
 COPY . /app
