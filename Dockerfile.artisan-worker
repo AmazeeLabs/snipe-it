@@ -1,14 +1,19 @@
-FROM amazeeio/php:7.2-cli
+FROM amazeeio/php:7.3-cli
 COPY lagoon/php-worker.ini /usr/local/etc/php/php.ini
 COPY . /app
 
 RUN apk add \
  openldap-dev \
  openldap  \
-&&docker-php-ext-configure ldap --with-libdir=lib/ \
-&& docker-php-ext-install ldap
+ libzip-dev \
+ tar \
+ unzip \
+ && docker-php-ext-configure ldap --with-libdir=lib/ \
+ && docker-php-ext-install ldap \
+ && docker-php-ext-configure zip --with-libzip=/usr/include \
+ && docker-php-ext-install zip
 
-RUN composer install --no-dev --prefer-dist
+RUN composer install --no-dev --prefer-source
 
 ENV APP_ENV=${LAGOON_ENVIRONMENT_TYPE}
 ENV WEBROOT=public
