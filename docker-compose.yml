@@ -81,7 +81,7 @@ services:
     labels:
       lagoon.type: nginx-php-persistent
       lagoon.name: nginx # we want this service be part of the nginx pod in Lagoon
-      lagoon.persistent: /app/config/
+      lagoon.persistent: /app/data/
     << : *default-volumes # loads the defined volumes from the top
     depends_on:
       - cli

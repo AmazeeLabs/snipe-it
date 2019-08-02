@@ -23,13 +23,15 @@ RUN apk add \
  && docker-php-ext-configure zip --with-libzip=/usr/include \
  && docker-php-ext-install zip
 
+#RUN fix-permissions /app/data/
+
 RUN mkdir -p \
-	  /app/data/storage \
+    /app/data \
+    /app/data/storage \
 	  /app/data/uploads \
     /app/data/private_uploads \
     /app/data/dumps \
-    /app/data/keys \
-    && fix-permissions /app/data/*
+    /app/data/keys
 
 RUN  ln -fs \
     /app/data/storage /app/storage \
