@@ -3,14 +3,14 @@ FROM amazeeio/node:8-builder as nodebuilder
 RUN echo '{ "allow_root": true }' > /home/.bowerrc
 RUN echo 'unsafe-perm=true' > /home/.npmrc
 
-COPY . /app/
+COPY package.json bower.json /app/
 
 RUN npm install -g npm
 
 FROM amazeeio/php:7.3-cli
 COPY lagoon/php-cli.ini /usr/local/etc/php/php.ini
 
-COPY . /app
+COPY . /app/
 
 RUN apk add \
  openldap-dev \
@@ -23,27 +23,9 @@ RUN apk add \
  && docker-php-ext-configure zip --with-libzip=/usr/include \
  && docker-php-ext-install zip
 
-#RUN fix-permissions /app/data/
-
-RUN mkdir -p \
-    /app/data \
-    /app/data/storage \
-	  /app/data/uploads \
-    /app/data/private_uploads \
-    /app/data/dumps \
-    /app/data/keys
-
-RUN  ln -fs \
-    /app/data/storage /app/storage \
-    /app/data/uploads /app/public/uploads \
-    /app/data/private_uploads /app/storage/private_uploads \
-    /app/data/dumps /app/storage/app/backups
-
-
-
 RUN composer install --no-dev --prefer-source
 
-COPY --from=nodebuilder /app/ /app/
+COPY --from=nodebuilder /app /app/
 COPY . /app
 
 ENV APP_ENV=${LAGOON_ENVIRONMENT_TYPE}

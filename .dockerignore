@@ -3,11 +3,10 @@
 .gitattributes
 .gitignore
 .dockerignore
-app/storage/logs/*
-app/storage/views/*
-vendor/*
-storage/framework/cache/*
+.env
 node_modules
+vendor
+storage/framework/cache/**
+storage/framework/sessions/**
+storage/framework/views/**
 .vagrant
-.idea
-

@@ -6,9 +6,13 @@ api: api-lagoon-master.lagoon.ch.amazee.io:80
 
 tasks:
   post-rollout:
+    - run:
+        name: Create directories
+        command: mkdir -p /app/storage/app/backups /app/storage/debugbar /app/storage/framework/cache /app/storage/framework/views /app/storage/framework/sessions /app/storage/private_uploads
+        service: cli
 #    - run:
-#        name: Create directories
-#        command: mkdir /app/storage/framework/ & mkdir /app/storage/framework/cache/ & mkdir /app/storage/framework/sessions/ & mkdir /app/storage/framework/views/ & mkdir /app/storage/private_uploads
+#        name: Create symlinks
+#        command: ln -sf /app/data/uploads /app/public && ln -sf /app/data/storage /app
 #        service: cli
     - run:
         name: Run migrations
@@ -19,8 +23,8 @@ tasks:
         command: php artisan storage:link
         service: cli
     - run:
-        name: Clear config
-        command: php artisan config:clear
+        name: Clear artisan
+        command: php artisan config:clear && php artisan view:clear && php artisan cache:clear && php artisan route:clear
         service: cli
     - run:
         name: Clear cache
@@ -28,7 +32,7 @@ tasks:
         service: cli
 
 environments:
- master:
+ prod:
    routes:
     - nginx:
        - "snipeit.amazeelabs.com"
