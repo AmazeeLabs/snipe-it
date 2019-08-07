@@ -228,12 +228,9 @@ class LicensesController extends Controller
 
             $seats = LicenseSeat::where('license_id', $licenseId)->with('license', 'user', 'asset');
 
-            $offset = request('offset', 0);
-            $limit = request('limit', 50);
+            $offset = (($seats) && (request('offset') > $seats->count())) ? 0 : request('offset', 0);
 
-            if($seats->count() < $offset){
-                $offset = 0;
-            }
+            $limit = request('limit', 50);
 
             $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
             $total = $seats->count();

@@ -29,6 +29,16 @@ Route::group(
             'uses' => 'Assets\AssetsController@scan'
         ]);
 
+        Route::get('audit/due', [
+            'as' => 'assets.audit.due',
+            'uses' => 'Assets\AssetsController@dueForAudit'
+        ]);
+
+        Route::get('audit/overdue', [
+            'as' => 'assets.audit.overdue',
+            'uses' => 'Assets\AssetsController@overdueForAudit'
+        ]);
+
         Route::get('audit/{id}', [
             'as' => 'asset.audit.create',
             'uses' => 'Assets\AssetsController@audit'

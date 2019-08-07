@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Support\Facades\Gate;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetCheckoutRequest;
@@ -44,7 +45,7 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function index(Request $request)
+    public function index(Request $request, $audit = null)
     {
 
         $this->authorize('index', Asset::class);
@@ -139,6 +140,21 @@ class AssetsController extends Controller
         $offset = (($assets) && (request('offset') > $assets->count())) ? 0 : request('offset', 0);
         $limit = $request->input('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+
+        // This is used by the audit reporting routes
+        if (Gate::allows('audit', Asset::class)) {
+
+            switch ($audit) {
+                case 'due':
+                    $assets->DueOrOverdueForAudit($settings);
+                    break;
+                case 'overdue':
+                    $assets->overdueForAudit($settings);
+                    break;
+            }
+        }
+
+
 
         // This is used by the sidenav, mostly
 
