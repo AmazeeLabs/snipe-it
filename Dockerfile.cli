@@ -23,6 +23,10 @@ RUN apk add \
  && docker-php-ext-configure zip --with-libzip=/usr/include \
  && docker-php-ext-install zip
 
+RUN fix-permissions \
+  /app/storage \
+  /app/public/uploads
+
 RUN composer install --no-dev --prefer-source
 
 COPY --from=nodebuilder /app /app/
