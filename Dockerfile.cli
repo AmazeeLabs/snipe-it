@@ -32,7 +32,6 @@ RUN composer install --no-dev --prefer-source
 COPY --from=nodebuilder /app /app/
 COPY . /app
 
-ENV APP_ENV=${LAGOON_ENVIRONMENT_TYPE}
 ENV WEBROOT=public
 ENV PAGER=less
 ENV PHP_MEMORY_LIMIT=8192M

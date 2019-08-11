@@ -3,7 +3,6 @@
 .gitattributes
 .gitignore
 .dockerignore
-.env
 node_modules
 vendor
 storage/framework/cache/**
