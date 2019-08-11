@@ -22,14 +22,14 @@ tasks:
         name: Run storage link
         command: php artisan storage:link
         service: cli
-    - run:
-        name: Clear artisan
-        command: php artisan config:clear && php artisan view:clear && php artisan cache:clear && php artisan route:clear
-        service: cli
-    - run:
-        name: Clear cache
-        command: php artisan config:cache
-        service: cli
+#    - run:
+#        name: Clear artisan
+#        command: php artisan config:clear && php artisan view:clear && php artisan cache:clear && php artisan route:clear
+#        service: cli
+#    - run:
+#        name: Clear cache
+#        command: php artisan config:cache
+#        service: cli
 
 environments:
  prod:
