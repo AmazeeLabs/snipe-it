@@ -10,10 +10,10 @@ tasks:
         name: Create directories
         command: mkdir -p /app/storage/app/backups /app/storage/debugbar /app/storage/framework/cache /app/storage/framework/views /app/storage/framework/sessions /app/storage/private_uploads
         service: cli
-#    - run:
-#        name: Create symlinks
-#        command: ln -sf /app/data/uploads /app/public && ln -sf /app/data/storage /app
-#        service: cli
+    - run:
+        name: Generate keys
+        command: php artisan key:generate
+        service: cli
     - run:
         name: Run migrations
         command: php artisan migrate
