@@ -22,9 +22,10 @@ tasks:
         name: Create symlinks
         command: ln -fs "/app/data/private_uploads" "/app/storage/private_uploads" && ln -fs "/app/data/uploads" "/app/public/uploads" && ln -fs "/app/data/dumps" "/app/storage/app/backups" && ln -fs "/app/keys/oauth-private.key" "/app/storage/oauth-private.key" && ln -fs "/app/keys/oauth-public.key" "/app/storage/oauth-public.key"
         service: cli
-    - run:
-        name: Fix permissions
-        command: fix-permissions /app/storage
+#    - run:
+#        name: Fix permissions
+#        command: fix-permissions /app/storage && fix-permissions /app/data
+#        service: cli
     - run:
         name: Run migrations
         command: php artisan migrate
