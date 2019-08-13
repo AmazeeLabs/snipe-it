@@ -13,19 +13,19 @@ tasks:
     - run:
         name: Clean directories
         command: rm -r "/app/storage/private_uploads" && rm -rf "/app/public/uploads" && rm -r "/app/storage/app/backups"
-        service: cli
+        service: nginx
     - run:
         name: Create directories
         command: mkdir -p /app/data/uploads && mkdir -p /app/data/private_uploads && mkdir -p /app/data/dumps && mkdir -p /app/data/keys
         service: cli
     - run:
         name: Create symlinks
-        command: ln -fs "/app/data/private_uploads" "/app/storage/private_uploads" && ln -fs "/app/data/uploads" "/app/public/uploads" && ln -fs "/app/data/dumps" "/app/storage/app/backups" && ln -fs "/app/keys/oauth-private.key" "/app/storage/oauth-private.key" && ln -fs "/app/keys/oauth-public.key" "/app/storage/oauth-public.key"
-        service: cli
+        command: ln -fs "/app/data/private_uploads" "/app/storage/private_uploads" && ln -fs "/app/data/uploads" "/app/public/uploads" && ln -fs "/app/data/dumps" "/app/storage/app/backups" && ln -fs "/app/data/keys/oauth-private.key" "/app/storage/oauth-private.key" && ln -fs "/app/data/keys/oauth-public.key" "/app/storage/oauth-public.key"
+        service: nginx
 #    - run:
 #        name: Fix permissions
 #        command: fix-permissions /app/storage && fix-permissions /app/data
-#        service: cli
+#        service: nginx
     - run:
         name: Run migrations
         command: php artisan migrate
