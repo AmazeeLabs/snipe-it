@@ -6,10 +6,25 @@ api: api-lagoon-master.lagoon.ch.amazee.io:80
 
 tasks:
   post-rollout:
-#    - run:
-#        name: Create directories
-#        command: mkdir -p /app/storage/app/backups /app/storage/debugbar /app/storage/framework/cache /app/storage/framework/views /app/storage/framework/sessions /app/storage/private_uploads
-#        service: cli
+    - run:
+        name: Generate keys
+        command: php artisan passport:keys
+        service: cli
+    - run:
+        name: Clean directories
+        command: rm -r "/app/storage/private_uploads" && rm -rf "/app/public/uploads" && rm -r "/app/storage/app/backups"
+        service: cli
+    - run:
+        name: Create directories
+        command: mkdir -p /app/data/uploads && mkdir -p /app/data/private_uploads && mkdir -p /app/data/dumps && mkdir -p /app/data/keys
+        service: cli
+    - run:
+        name: Create symlinks
+        command: ln -fs "/app/data/private_uploads" "/app/storage/private_uploads" && ln -fs "/app/data/uploads" "/app/public/uploads" && ln -fs "/app/data/dumps" "/app/storage/app/backups" && ln -fs "/app/keys/oauth-private.key" "/app/storage/oauth-private.key" && ln -fs "/app/keys/oauth-public.key" "/app/storage/oauth-public.key"
+        service: cli
+    - run:
+        name: Fix permissions
+        command: fix-permissions /app/storage
     - run:
         name: Run migrations
         command: php artisan migrate
