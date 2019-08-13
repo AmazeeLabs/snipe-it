@@ -6,10 +6,10 @@ api: api-lagoon-master.lagoon.ch.amazee.io:80
 
 tasks:
   post-rollout:
-    - run:
-        name: Create directories
-        command: mkdir -p /app/storage/app/backups /app/storage/debugbar /app/storage/framework/cache /app/storage/framework/views /app/storage/framework/sessions /app/storage/private_uploads
-        service: cli
+#    - run:
+#        name: Create directories
+#        command: mkdir -p /app/storage/app/backups /app/storage/debugbar /app/storage/framework/cache /app/storage/framework/views /app/storage/framework/sessions /app/storage/private_uploads
+#        service: cli
     - run:
         name: Generate keys
         command: php artisan key:generate

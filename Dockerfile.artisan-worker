@@ -13,8 +13,9 @@ RUN apk add \
  && docker-php-ext-configure zip --with-libzip=/usr/include \
  && docker-php-ext-install zip
 
-RUN composer install --no-dev --prefer-source
+RUN composer install --no-dev --prefer-dist
 
+ENV APP_ENV=${LAGOON_ENVIRONMENT_TYPE}
 ENV WEBROOT=public
 ENV PAGER=less
 ENV PHP_MEMORY_LIMIT=8192M
