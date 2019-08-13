@@ -11,24 +11,8 @@ tasks:
 #        command: mkdir -p /app/storage/app/backups /app/storage/debugbar /app/storage/framework/cache /app/storage/framework/views /app/storage/framework/sessions /app/storage/private_uploads
 #        service: cli
     - run:
-        name: Generate keys
-        command: php artisan key:generate
-        service: cli
-    - run:
         name: Run migrations
         command: php artisan migrate
-        service: cli
-    - run:
-        name: Run storage link
-        command: php artisan storage:link
-        service: cli
-    - run:
-        name: Clear artisan
-        command: php artisan config:clear && php artisan view:clear && php artisan cache:clear && php artisan route:clear
-        service: cli
-    - run:
-        name: Clear cache
-        command: php artisan config:cache
         service: cli
 
 environments:
