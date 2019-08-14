@@ -35,7 +35,7 @@ environments:
  prod:
    routes:
     - nginx:
-       - "snipeit.amazeelabs.com"
+       - "inventory.amazee.com"
    cronjobs:
      - name: artisan schedule
        schedule: "* * * * *"
