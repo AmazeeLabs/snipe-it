@@ -43,7 +43,7 @@ tasks:
           && mkdir -p "data/uploads/suppliers"
           && mkdir -p "data/dumps"
           && mkdir -p "data/keys"
-          $$ rm -r "/app/storage/private_uploads"
+          && rm -r "/app/storage/private_uploads"
           && mkdir -p "/app/data/private_uploads" && ln -fs "/app/data/private_uploads" "/app/storage/private_uploads"
           && rm -rf "/app/public/uploads"
           && mkdir -p "/app/data/uploads" && ln -fs "/app/data/uploads" "/app/public/uploads"
