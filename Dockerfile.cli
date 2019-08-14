@@ -25,8 +25,6 @@ RUN apk add \
 
 RUN composer install --no-dev --prefer-dist
 
-RUN php artisan passport:keys
-
 COPY --from=nodebuilder /app /app/
 COPY . /app
 
