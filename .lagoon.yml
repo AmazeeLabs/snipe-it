@@ -26,10 +26,10 @@ tasks:
 #        name: Fix permissions
 #        command: fix-permissions /app/storage && fix-permissions /app/data
 #        service: nginx
-    - run:
-        name: Run migrations
-        command: php artisan migrate
-        service: cli
+#    - run:
+#        name: Run migrations
+#        command: php artisan migrate
+#        service: cli
 
 environments:
  prod:
