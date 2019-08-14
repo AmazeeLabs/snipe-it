@@ -44,4 +44,4 @@ environments:
  dev:
    routes:
       - nginx:
-        - "snipeit-dev.ch.amazee.io"
+        - "inventory-dev.ch.amazee.io"
