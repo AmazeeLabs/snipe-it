@@ -28,9 +28,29 @@ tasks:
 #        service: nginx
     - run:
         name: Folder creation
-        command: /app/scripts/foldercreation.sh
+        command: mkdir -p "data/private_uploads"
+          && mkdir -p "data/uploads/accessories"
+          && mkdir -p "data/uploads/avatars"
+          && mkdir -p "data/uploads/barcodes"
+          && mkdir -p "data/uploads/categories"
+          && mkdir -p "data/uploads/companies"
+          && mkdir -p "data/uploads/components"
+          && mkdir -p "data/uploads/consumables"
+          && mkdir -p "data/uploads/departments"
+          && mkdir -p "data/uploads/locations"
+          && mkdir -p "data/uploads/manufacturers"
+          && mkdir -p "data/uploads/models"
+          && mkdir -p "data/uploads/suppliers"
+          && mkdir -p "data/dumps"
+          && mkdir -p "data/keys"
+          $$ rm -r "/app/storage/private_uploads"
+          && mkdir -p "/app/data/private_uploads" && ln -fs "/app/data/private_uploads" "/app/storage/private_uploads"
+          && rm -rf "/app/public/uploads"
+          && mkdir -p "/app/data/uploads" && ln -fs "/app/data/uploads" "/app/public/uploads"
+          && mkdir -p "/app/data/dumps" && rm -r "/app/storage/app/backups" && ln -fs "/app/data/dumps" "/app/storage/app/backups"
+          && mkdir -p "/app/data/keys" && ln -fs "/app/data/keys/oauth-private.key" "/app/storage/oauth-private.key"
+          && ln -fs "/app/data/keys/oauth-public.key" "/app/storage/oauth-public.key"
         service: nginx
-        shell: bash
     - run:
         name: Run migrations
         command: php artisan migrate
