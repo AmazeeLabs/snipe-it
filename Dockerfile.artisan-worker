@@ -1,6 +1,6 @@
 FROM amazeeio/php:7.3-cli
 COPY lagoon/php-worker.ini /usr/local/etc/php/php.ini
-COPY . /app
+COPY composer.json composer.lock /app/
 
 RUN apk add \
  openldap-dev \
@@ -15,8 +15,9 @@ RUN apk add \
 
 RUN composer install --no-dev --prefer-dist
 
-ENV APP_ENV=${LAGOON_ENVIRONMENT_TYPE}
-ENV WEBROOT=public
+COPY . /app
+
+ENV WEBROOT=app
 ENV PAGER=less
 ENV PHP_MEMORY_LIMIT=8192M
 CMD ["/app/scripts/worker.sh"]
