@@ -9,3 +9,5 @@ COPY --from=cli /app /app
 ENV WEBROOT=public
 
 RUN ls  /etc/nginx/conf.d/
+
+ENV APP_ENV=${LAGOON_ENVIRONMENT_TYPE}
